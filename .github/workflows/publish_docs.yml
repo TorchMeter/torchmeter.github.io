@@ -1,0 +1,200 @@
+# TorchMeter, AGPL-3.0 license
+# Author: Ahzyuan
+# Repo: https://github.com/TorchMeter/torchmeter
+
+name: 📤 Deploy TorchMeter Docs 📜
+
+on:
+  workflow_dispatch:
+    inputs:
+      repo_name: 
+        description: 'The name of the repo inside TorchMeter that contains the docs files'
+        default: 'torchmeter'
+        required: true
+        type: string
+  # schedule:
+  #   # Runs every day at 00:00 UTC
+  #   - cron: "0 0 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  Get-Latest-Version:
+    runs-on: ubuntu-latest
+
+    outputs:
+      tag: ${{ steps.latest-tag.outputs.tag }}
+
+    steps:
+      - name: Fetch Code
+        uses: actions/checkout@v4
+        with:
+          repository: TorchMeter/${{ github.event.inputs.repo_name || 'torchmeter' }}
+          fetch-depth: 0
+      
+      - name: Check Docs files
+        run: |
+          if [ ! -d docs ]; then
+            echo -e "\n❌ Docs directory does not exist" >&2
+            exit 1
+          elif [ ! -f mkdocs.yml ]; then
+            echo -e "\n❌ mkdocs.yml does not exist" >&2
+            exit 1
+          else
+            echo -e "\n✅ All necessary files for building documentation are ready"
+          fi
+      
+      - name: Get Latest Tag
+        id: latest-tag
+        run: |
+          tags=$(git for-each-ref --sort=-creatordate --format '%(refname:short)' refs/tags)
+          
+          LATEST_TAG=""
+          found=0
+
+          for tag in $tags; do
+            if [[ $tag =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              LATEST_TAG=$tag
+              found=1
+              break
+            fi
+          done
+
+          if [ $found -ne 1 ]; then
+            echo -e "\n❌ No valid tag found matching format vA.B.C" >&2
+            exit 1
+          fi
+
+          echo "tag=$LATEST_TAG" >> $GITHUB_OUTPUT
+          echo -e "\n✅ Docs will be built for version $LATEST_TAG"
+          
+  Deploy:
+    runs-on: ubuntu-latest
+
+    needs: Get-Latest-Version
+    if: github.repository == 'TorchMeter/docs'
+
+    steps:
+      - name: Fetch Code
+        uses: actions/checkout@v4
+
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      
+      - name: Cache Mkdocs
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.cfg') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Setup Drawio
+        run: |
+          set -eo pipefail
+
+          drawio_arch=amd64
+          drawio_version=18.1.3
+          drawio_sha256sum=39a50f25ad52d6909c5c18d89a7cfc193e8e31fb98458a390c0a0709d22e9e10
+
+          drawio_deb="drawio-${drawio_arch}-${drawio_version}.deb"
+          drawio_url="https://github.com/jgraph/drawio-desktop/releases/download/v${drawio_version}/${drawio_deb}"
+
+          curl -L -o "$drawio_deb" "$drawio_url" &
+          sudo apt-get install -y libasound2t64 xvfb &
+          wait
+
+          sha256sum --check <<<"${drawio_sha256sum}  $drawio_deb"
+          sudo apt-get install -y ./"$drawio_deb"
+
+      - name: Prepare for Building Docs
+        run: |
+          WORKING_PATH=$(pwd)
+          set -eo pipefail
+
+          # clone torchmeter's assets and source code in parallel
+          git clone https://github.com/TorchMeter/assets.git /tmp/torchmeter-assets &
+          git clone https://github.com/TorchMeter/${{ github.event.inputs.repo_name || 'torchmeter' }}.git /tmp/torchmeter-src &
+          wait  
+
+          # checkout the correct version
+          (cd /tmp/torchmeter-assets && git checkout ${{ needs.Get-Latest-Version.outputs.tag }} || git checkout master) &
+          (cd /tmp/torchmeter-src && git checkout ${{ needs.Get-Latest-Version.outputs.tag }}) &
+          wait
+
+          # copy docs-related files to working directory in parallel
+          cp -rfL /tmp/torchmeter-src/docs $WORKING_PATH/docs &
+          cp -rfL /tmp/torchmeter-src/torchmeter $WORKING_PATH/torchmeter &
+          cp -f /tmp/torchmeter-src/mkdocs.yml $WORKING_PATH/mkdocs.yml &
+          cp -f /tmp/torchmeter-src/default_cfg.yaml $WORKING_PATH/default_cfg.yaml &
+          wait
+
+          # link to assets for all locales directories
+          cd $WORKING_PATH/docs/src/
+          for dir in ./*/; do
+            if [ -d "$dir" ]; then
+              ln -sf /tmp/torchmeter-assets "$dir/assets" &
+            fi
+          done
+          wait
+
+          # install dependencies
+          python3 -m pip install --upgrade pip 
+          DEPS=$(python -c "import configparser; c=configparser.ConfigParser(); c.read('/tmp/torchmeter-src/setup.cfg'); print(' '.join(c['options.extras_require']['docs'].split('\n')))")
+          python3 -m pip install $DEPS 
+
+          cd $WORKING_PATH
+      
+      - name: Deploy Stable
+        run: |
+          # mkdocs gh-deploy --force
+          
+          git checkout gh-pages || git checkout --orphan gh-pages
+          git pull origin gh-pages --depth=1 || echo "No remote changes to pull"
+          git checkout master 
+
+          xvfb-run -a mike deploy -pu ${{ needs.Get-Latest-Version.outputs.tag }} latest
+          mike set-default -p latest
+
+      - name: Deploy Dev
+        run: |
+          WORKING_PATH=$(pwd)
+          rm -rf ./*
+          set -eo pipefail
+
+          # switch to master branch
+          (cd /tmp/torchmeter-assets && git checkout master) &
+          (cd /tmp/torchmeter-src && git checkout master) &
+          wait
+
+          # copy docs-related files to working directory in parallel
+          cp -rfL /tmp/torchmeter-src/docs $WORKING_PATH/docs &
+          cp -rfL /tmp/torchmeter-src/torchmeter $WORKING_PATH/torchmeter &
+          cp -f /tmp/torchmeter-src/mkdocs.yml $WORKING_PATH/mkdocs.yml &
+          cp -f /tmp/torchmeter-src/default_cfg.yaml $WORKING_PATH/default_cfg.yaml &
+          wait
+
+          # link to assets for all locales directories
+          cd $WORKING_PATH/docs/src/
+          for dir in ./*/; do
+            if [ -d "$dir" ]; then
+              ln -sf /tmp/torchmeter-assets "$dir/assets" &
+            fi
+          done
+          wait
+          
+          git checkout gh-pages || git checkout --orphan gh-pages
+          git pull origin gh-pages --depth=1 || echo "No remote changes to pull"
+          git checkout master 
+          
+          cd $WORKING_PATH
+          xvfb-run -a mike deploy -pu dev
