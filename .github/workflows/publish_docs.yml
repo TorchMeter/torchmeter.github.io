@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: Get-Latest-Version
-    if: github.repository == 'TorchMeter/docs'
+    if: github.repository == 'TorchMeter/torchmeter.github.io'
 
     steps:
       - name: Fetch Code
