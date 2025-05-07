@@ -1,0 +1,1480 @@
+<!-- 
+TorchMeter, AGPL-3.0 license
+Author: Ahzyuan
+Repo: https://github.com/TorchMeter/torchmeter 
+-->
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Torchmeter ⏲️:  Your all-in-one tool for Pytorch model analysis, measuring Params, FLOPs/MACs(aka. MACC or MADD), Memory cost, Inference time and Throughput 🚀">
+      
+      
+        <meta name="author" content="Ahzyuan">
+      
+      
+        <link rel="canonical" href="https://docs.torchmeter.top/latest/others/architecture/">
+      
+      
+        <link rel="prev" href="../../contribute/thanks_contributors/">
+      
+      
+        <link rel="next" href="../management/">
+      
+      
+      <link rel="icon" href="../../assets/logo/logo_black.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Project Architecture - TorchMeter Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Project-Architecture" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're viewing an old/unstable version.
+  <a href="../../.."> 
+    <strong>Click here to go to the latest stable one.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TorchMeter Docs" class="md-header__button md-logo" aria-label="TorchMeter Docs" data-md-component="logo">
+      
+  <img src="../../assets/banner/banner_noeffect.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TorchMeter Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Project Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TorchMeter/torchmeter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TorchMeter/torchmeter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intros
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../demo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tutorials
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../cheatsheet/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheatsheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/core/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contribute/welcome_contributors/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contribute
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Others
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TorchMeter Docs" class="md-nav__button md-logo" aria-label="TorchMeter Docs" data-md-component="logo">
+      
+  <img src="../../assets/banner/banner_noeffect.png" alt="logo">
+
+    </a>
+    TorchMeter Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TorchMeter/torchmeter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TorchMeter/torchmeter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intros
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cheatsheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../api/core/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../contribute/welcome_contributors/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Contribute
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Others
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Others
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Project Architecture
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Project Architecture
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Structure-Overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Detailed-Introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-__init__py" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. __init__.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-__cli__py" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. __cli__.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pytyped" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. py.typed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-_stat_numericpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. _stat_numeric.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-unitpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. unit.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-utilspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. utils.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-corepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. core.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-configpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. config.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-enginepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. engine.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-displaypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. display.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-statisticpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. statistic.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Structure-Overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Detailed-Introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-__init__py" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. __init__.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-__cli__py" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. __cli__.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pytyped" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. py.typed
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-_stat_numericpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. _stat_numeric.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-unitpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. unit.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-utilspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. utils.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-corepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. core.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-configpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. config.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-enginepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. engine.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-displaypy" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. display.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-statisticpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. statistic.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+<!-- hide h1 for index.md -->
+
+
+
+
+
+                  
+
+
+  
+  
+    
+      
+    
+    <a href="https://github.com/TorchMeter/torchmeter/tree/master/docs/src/en/others/architecture.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="Project-Architecture">Project Architecture<a class="headerlink" href="#Project-Architecture" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p>This document outlines the architecture of <code>torchmeter</code>'s codebase, detailing each module's purpose and functionality. </p>
+<p>Hoping this helps you quickly understand the structure of <code>torchmeter</code> and boosts your contribution efficiency.</p>
+</div>
+<h2 id="Structure-Overview"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 7h4v10h-2V9h-2zm2-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Structure Overview</strong><a class="headerlink" href="#Structure-Overview" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>torchmeter
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── __init__.py         # Package initialization &amp; metadata  
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── __cli__.py          # CLI tool implementation (not implemented) 
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── py.typed            # PEP-561 type hinting marker
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── _stat_numeric.py    # Numeric data structures for metric tracking  
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>├── unit.py             # Unit systems and automatic unit conversion  
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├── utils.py            # Utility functions/classes for common tasks  
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── core.py             # Central analytics engine for PyTorch model analysis  
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── config.py           # Configuration management with YAML and singleton patterns  
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>├── engine.py           # Hierarchical operation trees for model structure analysis 
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├── display.py          # Visualization components for model architecture and metrics  
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>└── statistic.py        # Modular meters for model parameter/computation/memory/inference-time/thoughput analysis   
+</code></pre></div>
+<h2 id="Detailed-Introduction"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2v2h4v2H9v-4a2 2 0 0 1 2-2h2V9H9zm3-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Detailed Introduction</strong><a class="headerlink" href="#Detailed-Introduction" title="Permanent link">&para;</a></h2>
+<h3 id="1-__init__py">1. <code>__init__.py</code><a class="headerlink" href="#1-__init__py" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Implements package initialization, defining metadata, versioning, and public API declarations.  </p>
+</dd>
+<dt><strong>Global Variables</strong>  </dt>
+<dd>
+<ul>
+<li><code>__version__</code>: Package version identifier.  </li>
+<li><code>__all__</code>: Explicitly declares public API exports.  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+<dt><strong>Classes</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+</dl>
+<hr />
+<h3 id="2-__cli__py">2. <code>__cli__.py</code><a class="headerlink" href="#2-__cli__py" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Not implemented yet  </p>
+</blockquote>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Implements command-line interface (CLI) tool logic.  </p>
+</dd>
+<dt><strong>Global Variables</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<ul>
+<li><code>main</code>: Main entry point for CLI tool.</li>
+</ul>
+</dd>
+<dt><strong>Classes</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+</dl>
+<hr />
+<h3 id="3-pytyped">3. <code>py.typed</code><a class="headerlink" href="#3-pytyped" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Serves as a <code>PEP 561</code> type hinting marker for static type checking.  </p>
+</dd>
+</dl>
+<hr />
+<h3 id="4-_stat_numericpy">4. <code>_stat_numeric.py</code><a class="headerlink" href="#4-_stat_numericpy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Implements numeric data structures for metric tracking and statistical aggregation </p>
+</dd>
+<dt><strong>Global Variables</strong></dt>
+<dd>
+<p><em>None</em></p>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<p><em>None</em></p>
+</dd>
+<dt><strong>Classes</strong></dt>
+<dd>
+<ul>
+<li><code>NumericData</code> (<code>ABC</code>) An abstract class for numeric data operations  </li>
+<li><code>UpperLinkData</code>: Implement hierarchical metric tracking with parent-child relationships  </li>
+<li><code>MetricsData</code>: Implement batch metric collection and statistical analysis  </li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="5-unitpy">5. <code>unit.py</code><a class="headerlink" href="#5-unitpy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Implements unit systems and automatic unit conversion for numeric values  </p>
+</dd>
+<dt><strong>Global Variables</strong></dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>CountUnit</code>, <code>BinaryUnit</code>, <code>TimeUnit</code>, <code>SpeedUnit</code>, <code>auto_unit</code>)  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<ul>
+<li><code>auto_unit</code>: Automatically selects appropriate unit based on value magnitude and formats as string  </li>
+</ul>
+</dd>
+<dt><strong>Classes</strong></dt>
+<dd>
+<ul>
+<li><code>CountUnit</code> (<code>Enum</code>): Decimal-based unit system (K/M/G/T for 1e3/1e6/1e9/1e12)  </li>
+<li><code>BinaryUnit</code> (<code>IntFlag</code>): Binary-based unit system (KiB/MiB/GiB/TiB for 2^10/20/30/40)  </li>
+<li><code>TimeUnit</code> (<code>Enum</code>): Time unit system (h/min/s/ms/us/ns)  </li>
+<li><code>SpeedUnit</code> (<code>Enum</code>): Operational speed unit system (Input Per Second, IPS/KIPS/MIPS/GIPS/TIPS)  </li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="6-utilspy">6. <code>utils.py</code><a class="headerlink" href="#6-utilspy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Provides utility functions or classes for common tasks such as file io, string formatting etc.</p>
+</dd>
+<dt><strong>Global Variables</strong></dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>dfs_task</code>, <code>data_repr</code>, <code>Timer</code>)  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<ul>
+<li><code>resolve_savepath</code>: Decouples save path into dir and filename, and allows customizable filenames, validates file extensions. </li>
+<li><code>hasargs</code>: Validates required arguments exist in a function signature  </li>
+<li><code>dfs_task</code>: Executes depth-first search tasks on hierarchical data structures  </li>
+<li><code>indent_str</code>: Formats text with customizable indentation and guidelines  </li>
+<li><code>data_repr</code>: Generates rich-formatted string representations for data structures  </li>
+<li><code>match_polars_type</code>: Infers Polars data types from Python/Numpy objects  </li>
+</ul>
+</dd>
+<dt><strong>Classes</strong></dt>
+<dd>
+<ul>
+<li><code>Timer</code> (<code>rich.status.Status</code>): Context manager for tracking and displaying execution time  </li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="7-corepy">7. <code>core.py</code><a class="headerlink" href="#7-corepy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Provides a central analytics engine for <code>PyTorch</code> model performance analysis and visualization.  </p>
+</dd>
+<dt><strong>Global Variables</strong></dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>Meter</code>)  </li>
+<li><code>__cfg__</code>: Global configuration  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+<dt><strong>Classes</strong></dt>
+<dd>
+<ul>
+<li><code>Meter</code>: Provides end-to-end measurement capabilities for neural networks, including 
+parameter statistics, computational cost analysis, memory usage tracking, inference time and 
+throughput analysis. It serves as a wrapper around <code>PyTorch</code> modules while maintaining full compatibility 
+with native model operations.</li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="8-configpy">8. <code>config.py</code><a class="headerlink" href="#8-configpy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Provides centralized configuration management for visualization parameters and layout presets through <code>YAML</code> parsing, singleton pattern enforcement, and reactive change tracking. </p>
+</dd>
+<dt><strong>Global Variables</strong>  </dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>get_config</code>, <code>Config</code>)</li>
+<li><code>DEFAULT_CFG</code>: Stores default YAML configurations for rendering intervals, tree/table styling, and layout parameters.  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong>  </dt>
+<dd>
+<ul>
+<li><code>list_to_callbacklist</code>: Wraps lists with mutation callbacks for state tracking.  </li>
+<li><code>dict_to_namespace</code>: Converts dictionaries to observable <code>FlagNameSpace</code> objects recursively.  </li>
+<li><code>namespace_to_dict</code>: Serializes <code>FlagNameSpace</code> back to dictionaries for persistence.  </li>
+<li><code>get_config</code>: Ensures thread-safe singleton access to configuration instances with environment/file override support.  </li>
+</ul>
+</dd>
+<dt><strong>Classes</strong>  </dt>
+<dd>
+<ul>
+<li><code>ConfigMeta</code>: Enforces singleton pattern via metaclass for global configuration consistency.  </li>
+<li><code>Config</code>: Central configuration manager handling YAML loading, validation, and dynamic updates.  </li>
+<li><code>FlagNameSpace</code>: Extends <code>SimpleNamespace</code> with nested change tracking.  </li>
+<li><code>CallbackList/CallbackSet</code>: Collection proxies that propagate modification events through callback chains</li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="9-enginepy">9. <code>engine.py</code><a class="headerlink" href="#9-enginepy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Constructs hierarchical operation trees for <code>PyTorch</code> models to track parameters, computational costs, memory usage, and inference time metrics.  </p>
+</dd>
+<dt><strong>Global Variables</strong>  </dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>OperationNode</code>, <code>OperationTree</code>).  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+<dt><strong>Classes</strong>  </dt>
+<dd>
+<ul>
+<li><code>OperationNode</code>: Represents individual model components with hierarchical relationships, stores module meta info, statistical     metrics (parameters, computation, memory, throughput), and tracks module repetitions.  </li>
+<li><code>OperationTree</code>: Constructs the structural and display trees simultaneously through depth-first traversal, and identifying repeated modules to implement smart folding of repeated blocks.</li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="10-displaypy">10. <code>display.py</code><a class="headerlink" href="#10-displaypy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Implements visualization components for rendering <code>PyTorch</code> model architecture as rich text tree and performance metrics as programmable tabular reports, supporting configuration-driven styling and data export capabilities.  </p>
+</dd>
+<dt><strong>Global Variables</strong> </dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>render_perline</code>, <code>TreeRenderer</code>, <code>TabularRenderer</code>).  </li>
+<li><code>__cfg__</code>: Global configuration.</li>
+</ul>
+</dd>
+<dt><strong>Functions</strong> </dt>
+<dd>
+<ul>
+<li><code>apply_setting</code>: Dynamically applies configuration in tree or tabular report rendering process.</li>
+<li><code>render_perline</code>: Implements progressive rendering with configurable delay for terminal animation effects.  </li>
+</ul>
+</dd>
+<dt><strong>Classes</strong>  </dt>
+<dd>
+<ul>
+<li><code>TreeRenderer</code>: Generates collapsible tree visualizations with loop algebra notation for repeated modules through depth-first traversal and configuration inheritance.  </li>
+<li><code>TabularRenderer</code>: Produces customizable metric tables with column filtering/renaming, dynamic column management(rename, insert, delete and interact), and CSV/XLSX export functionality.  </li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h3 id="11-statisticpy">11. <code>statistic.py</code><a class="headerlink" href="#11-statisticpy" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Purpose</strong></dt>
+<dd>
+<p>Implements metering tools for comprehensive PyTorch model analysis across parameters, computation, memory, and inference performance through modular measurement components.  </p>
+</dd>
+<dt><strong>Global Variables</strong>  </dt>
+<dd>
+<ul>
+<li><code>__all__</code>: Public API exports (<code>ParamsMeter</code>, <code>CalMeter</code>, <code>MemMeter</code>, <code>IttpMeter</code>).  </li>
+</ul>
+</dd>
+<dt><strong>Functions</strong></dt>
+<dd>
+<p><em>None</em>  </p>
+</dd>
+<dt><strong>Classes</strong>  </dt>
+<dd>
+<ul>
+<li><code>Statistics</code>: Abstract base class defining common interfaces and properties for all specialized metric calculators.  </li>
+<li><code>ParamsMeter</code>: Quantifies total/learnable parameters across model layers with hierarchical aggregation capabilities.  </li>
+<li><code>CalMeter</code>: Calculates floating-point operations (<code>FLOPs</code>/<code>MACS</code>) using layer-specific forward hooks and kernel analysis.  </li>
+<li><code>MemMeter</code>: Measures parameter/buffer/memory overhead in binary units via deep object size inspection.  </li>
+<li><code>IttpMeter</code>: Benchmarks inference latency/throughput using device-optimized timing (<code>CPU</code> wall-clock/<code>CUDA</code> events)</li>
+</ul>
+</dd>
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a href="https://github.com/TorchMeter" target="_blank">© 2025 TorchMeter</a> All rights reserved.
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/TorchMeter/torchmeter/discussions" target="_blank" rel="noopener" title="Community" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M208 352c114.9 0 208-78.8 208-176S322.9 0 208 0 0 78.8 0 176c0 38.6 14.7 74.3 39.6 103.4-3.5 9.4-8.7 17.7-14.2 24.7-4.8 6.2-9.7 11-13.3 14.3-1.8 1.6-3.3 2.9-4.3 3.7-.5.4-.9.7-1.1.8l-.2.2C1 327.2-1.4 334.4.8 340.9S9.1 352 16 352c21.8 0 43.8-5.6 62.1-12.5 9.2-3.5 17.8-7.4 25.2-11.4C134.1 343.3 169.8 352 208 352m240-176c0 112.3-99.1 196.9-216.5 207 24.3 74.4 104.9 129 200.5 129 38.2 0 73.9-8.7 104.7-23.9 7.5 4 16 7.9 25.2 11.4 18.3 6.9 40.3 12.5 62.1 12.5 6.9 0 13.1-4.5 15.2-11.1s-.2-13.8-5.8-17.9l-.2-.2c-.2-.2-.6-.4-1.1-.8-1-.8-2.5-2-4.3-3.7-3.6-3.3-8.5-8.1-13.3-14.3-5.5-7-10.7-15.4-14.2-24.7 24.9-29 39.6-64.7 39.6-103.4 0-92.8-84.9-168.9-192.6-175.5.4 5.1.6 10.3.6 15.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/TorchMeter/torchmeter" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://pypi.org/project/torchmeter/" target="_blank" rel="noopener" title="PyPI" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/TorchMeter/torchmeter/blob/master/LICENSE" target="_blank" rel="noopener" title="License" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M384 32h128c17.7 0 32 14.3 32 32s-14.3 32-32 32H398.4c-5.2 25.8-22.9 47.1-46.4 57.3V448h160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32-14.3-32-32s14.3-32 32-32h160V153.3c-23.5-10.3-41.2-31.6-46.4-57.3H128c-17.7 0-32-14.3-32-32s14.3-32 32-32h128c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32m55.6 288h144.9L512 195.8zm72.4 96c-62.9 0-115.2-34-126-78.9-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8L631.3 305c5.7 9.8 9.3 21.1 6.7 32.1C627.2 382 574.9 416 512 416M126.8 195.8 54.4 320h144.9zM.9 337.1c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8L246.2 305c5.7 9.8 9.3 21.1 6.7 32.1C242 382 189.7 416 126.8 416S11.7 382 .9 337.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.view", "content.code.annotate", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "search.share", "search.suggest", "search.highlight", "toc.follow", "navigation.top", "navigation.tabs", "navigation.path", "navigation.tabs.sticky", "navigation.prune", "navigation.tracking", "navigation.instant", "navigation.instant.preview", "navigation.instant.progress", "navigation.indexes", "navigation.sections"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

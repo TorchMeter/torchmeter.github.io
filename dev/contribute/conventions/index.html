@@ -1,0 +1,1950 @@
+<!-- 
+TorchMeter, AGPL-3.0 license
+Author: Ahzyuan
+Repo: https://github.com/TorchMeter/torchmeter 
+-->
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Torchmeter ⏲️:  Your all-in-one tool for Pytorch model analysis, measuring Params, FLOPs/MACs(aka. MACC or MADD), Memory cost, Inference time and Throughput 🚀">
+      
+      
+        <meta name="author" content="Ahzyuan">
+      
+      
+        <link rel="canonical" href="https://docs.torchmeter.top/latest/contribute/conventions/">
+      
+      
+        <link rel="prev" href="../prs/">
+      
+      
+        <link rel="next" href="../thanks_contributors/">
+      
+      
+      <link rel="icon" href="../../assets/logo/logo_black.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Conventions - TorchMeter Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Conventions--Lets-Make-it-Easy-and-Standardize" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're viewing an old/unstable version.
+  <a href="../../.."> 
+    <strong>Click here to go to the latest stable one.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TorchMeter Docs" class="md-header__button md-logo" aria-label="TorchMeter Docs" data-md-component="logo">
+      
+  <img src="../../assets/banner/banner_noeffect.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TorchMeter Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Conventions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/TorchMeter/torchmeter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TorchMeter/torchmeter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Intros
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../demo/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tutorials
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../cheatsheet/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheatsheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/core/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../welcome_contributors/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Contribute
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../others/architecture/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Others
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TorchMeter Docs" class="md-nav__button md-logo" aria-label="TorchMeter Docs" data-md-component="logo">
+      
+  <img src="../../assets/banner/banner_noeffect.png" alt="logo">
+
+    </a>
+    TorchMeter Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/TorchMeter/torchmeter" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TorchMeter/torchmeter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Intros
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../demo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cheatsheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../api/core/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Contribute
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Contribute
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../welcome_contributors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Welcome, Contributors!
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../discussions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Discussions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../issues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Issues
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../prs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pull Requests (PRs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Conventions
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conventions
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Branch-Name" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch Name
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branch Name">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why this matters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Best-Practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Commit-Message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commit Message
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Why-this-matters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why this matters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Structure_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Best-Practices_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Pull-Request-Title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request Title
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pull Request Title">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Why-this-matters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why this matters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Structure_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Best-Practices_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thanks_contributors/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Acknowledgement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../others/architecture/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    Others
+    
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Branch-Name" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branch Name
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Branch Name">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Why-this-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why this matters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Best-Practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Commit-Message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commit Message
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commit Message">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Why-this-matters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why this matters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Structure_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Best-Practices_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Pull-Request-Title" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Request Title
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pull Request Title">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Why-this-matters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why this matters?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Structure_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Best-Practices_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+<!-- hide h1 for index.md -->
+
+
+
+
+
+                  
+
+
+  
+  
+    
+      
+    
+    <a href="https://github.com/TorchMeter/torchmeter/tree/master/docs/src/en/contribute/conventions.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="Conventions--Lets-Make-it-Easy-and-Standardize">Conventions — Let's Make it Easy and Standardize<a class="headerlink" href="#Conventions--Lets-Make-it-Easy-and-Standardize" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p>Hi, contributors:</p>
+<p>We highly appreciate your patience in following these guidelines to help us keep <code>torchmeter</code> organized and maintainable.</p>
+<p><strong>Thank you !</strong> 🌟</p>
+</div>
+<h2 id="Branch-Name"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 7h4v10h-2V9h-2zm2-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Branch Name</strong><a class="headerlink" href="#Branch-Name" title="Permanent link">&para;</a></h2>
+<h3 id="Why-this-matters"><strong>Why this matters?</strong><a class="headerlink" href="#Why-this-matters" title="Permanent link">&para;</a></h3>
+<p>Consistent naming rule helps us:  </p>
+<ul>
+<li>🧐 Quickly evaluate contributions  </li>
+<li>💪 Maintain codebase health  </li>
+<li>🤝 Improve collaborative efficiency  </li>
+</ul>
+<hr />
+<h3 id="Structure"><strong>Structure</strong><a class="headerlink" href="#Structure" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>[category]/[optional-issue-number]-[short-description]
+</code></pre></div>
+<details class="tip">
+<summary>Key Principles</summary>
+<ol>
+<li><strong>Descriptive &amp; Concise</strong>: Balance clarity with brevity for quick scanning</li>
+<li><strong>Semantic Structure</strong>: Use meaningful prefixes and descriptive suffixes</li>
+<li><strong>Traceability</strong>: Link branches to specific development contexts</li>
+</ol>
+</details>
+<details class="abstract">
+<summary>Category Prefixes</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Prefix</th>
+<th style="text-align: center;">Purpose</th>
+<th style="text-align: center;">When to Use</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>feat</code></td>
+<td style="text-align: center;">New functionality</td>
+<td style="text-align: center;">Adding new capabilities</td>
+<td style="text-align: center;"><code>feature/#86-optimize-cache</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>bugfix</code></td>
+<td style="text-align: center;">Bug corrections</td>
+<td style="text-align: center;">Fixing unexpected behavior</td>
+<td style="text-align: center;"><code>bugfix/div-zero-error</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>docs</code></td>
+<td style="text-align: center;">Documentation updates</td>
+<td style="text-align: center;">Improving guides/comments</td>
+<td style="text-align: center;"><code>docs/add-install-notes</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>test</code></td>
+<td style="text-align: center;">Testing improvements</td>
+<td style="text-align: center;">Enhancing test coverage</td>
+<td style="text-align: center;"><code>test/add-edge-cases</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>refactor</code></td>
+<td style="text-align: center;">Code restructuring</td>
+<td style="text-align: center;">Improving code structure</td>
+<td style="text-align: center;"><code>refactor/metrics-handler</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>hotfix</code></td>
+<td style="text-align: center;">Critical fixes</td>
+<td style="text-align: center;">Urgent production fixes</td>
+<td style="text-align: center;"><code>hotfix/memory-leak-patch</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>chore</code></td>
+<td style="text-align: center;">Project maintenance</td>
+<td style="text-align: center;">Updating dependencies/builds</td>
+<td style="text-align: center;"><code>chore/update-requirements</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<hr />
+<h3 id="Best-Practices"><strong>Best Practices</strong><a class="headerlink" href="#Best-Practices" title="Permanent link">&para;</a></h3>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-7 14h2V5h-4v2h2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Reference issues (when applicable)</summary>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bugfix/#123-fix-tensor-shape
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13h-4v-2h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4v2h4v2h-2a2 2 0 0 0-2 2v4h6m4 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Keep it concise (3-5 key words)</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 👍 Clear and scoped</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>feat/nocall-modules-handling
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># 👎 Too vague</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>feat/new-stuff
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13v-1.5a1.5 1.5 0 0 0-1.5-1.5A1.5 1.5 0 0 0 17 8.5V7a2 2 0 0 0-2-2h-4v2h4v2h-2v2h2v2h-4v2h4a2 2 0 0 0 2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m18-4H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/></svg></span> Use lowercase with hyphens</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 👍 Consistent formatting</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docs/update-contrib-guide
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 👎 Mixed formatting</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Docs/Update_contrib_guide
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-6 14h2V5h-2v4h-2V5h-2v6h4M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Avoid unclear abbreviations</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 👍 Full description</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>bugfix/fix-memory-leak
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># 👎 Use abbreviations without prior agreement</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>bugfix/fx-mem
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13v-2a2 2 0 0 0-2-2h-2V7h4V5h-6v6h4v2h-4v2h4a2 2 0 0 0 2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m18-4H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/></svg></span> Avoid version numbers</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 👍 Feature description</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>feat/new-tree-renderer
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 👎 Include version numbers</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>feat/v2.1.0
+</code></pre></div>
+</details>
+<hr />
+<h2 id="Commit-Message"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2v2h4v2H9v-4a2 2 0 0 1 2-2h2V9H9zm3-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Commit Message</strong><a class="headerlink" href="#Commit-Message" title="Permanent link">&para;</a></h2>
+<h3 id="Why-this-matters_1"><strong>Why this matters?</strong><a class="headerlink" href="#Why-this-matters_1" title="Permanent link">&para;</a></h3>
+<p>Clear commit message helps us:</p>
+<ul>
+<li>🔍 Track down specific changes</li>
+<li>📖 Understand change context quickly</li>
+<li>🤝 Improve collaborative efficiency</li>
+</ul>
+<hr />
+<h3 id="Structure_1"><strong>Structure</strong><a class="headerlink" href="#Structure_1" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&lt;type&gt;[optional scope]: &lt;subject&gt;
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>[optional body]
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>[optional footer]
+</code></pre></div>
+<details class="abstract">
+<summary>Type Prefixes</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Prefix</th>
+<th style="text-align: center;">Change Type</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>feat</code></td>
+<td style="text-align: center;">New feature</td>
+<td style="text-align: center;"><code>feat(render): implement custom display of statistic</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>fix</code></td>
+<td style="text-align: center;">Bug fix</td>
+<td style="text-align: center;"><code>fix(memory): resolve CUDA memory leak in measuring mem</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>docs</code></td>
+<td style="text-align: center;">Documentation</td>
+<td style="text-align: center;"><code>docs: update API reference</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>test</code></td>
+<td style="text-align: center;">Test-related</td>
+<td style="text-align: center;"><code>test(metrics): add edge cases for xxx</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ci</code></td>
+<td style="text-align: center;">Workflow-related</td>
+<td style="text-align: center;"><code>ci(badge-update): revise the content to be updated</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>refactor</code></td>
+<td style="text-align: center;">Code refactoring</td>
+<td style="text-align: center;"><code>refactor: simplify module registration</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>perf</code></td>
+<td style="text-align: center;">Performance</td>
+<td style="text-align: center;"><code>perf: optimize tree rendering</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>chore</code></td>
+<td style="text-align: center;">Repo maintemance</td>
+<td style="text-align: center;"><code>chore: update issue template</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>build</code></td>
+<td style="text-align: center;">Distribution packages building</td>
+<td style="text-align: center;"><code>build: update package introduction in setup.cfg</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="abstract">
+<summary>Scope</summary>
+<blockquote>
+<p>A scope is to identify the specific area of the codebase being modified</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Scope Name</th>
+<th style="text-align: center;">Notes</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>infra</code></td>
+<td style="text-align: center;">For DevOps/Infra changes</td>
+<td style="text-align: center;"><code>chore(infra): update CI config</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>[module-name]</code></td>
+<td style="text-align: center;">Match directory/module names</td>
+<td style="text-align: center;"><code>fix(core): add input validation for profile()</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>[feature-area]</code></td>
+<td style="text-align: center;">See below</td>
+<td style="text-align: center;"><code>perf(render): speed up tree rendering</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>[document-section]</code></td>
+<td style="text-align: center;">Specific doc section</td>
+<td style="text-align: center;"><code>docs(install): add method to install from source</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>[workflow-funtion]</code></td>
+<td style="text-align: center;">See below</td>
+<td style="text-align: center;"><code>ci(badge-update): revise the content to be updated</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>unit</code> / <code>integrate</code></td>
+<td style="text-align: center;">Test category</td>
+<td style="text-align: center;"><code>test(unit): add edge cases</code></td>
+</tr>
+</tbody>
+</table>
+<details class="note">
+<summary>Feature-Area</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Feature-Area</th>
+<th style="text-align: center;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>render</code></td>
+<td style="text-align: center;">Changes related to rendering and terminal output</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>measure</code></td>
+<td style="text-align: center;">Changes related to the measurement of statistics</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>config</code></td>
+<td style="text-align: center;">Changes related to global configuration</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>model-scan</code></td>
+<td style="text-align: center;">Changes related to model structure exploration</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>api</code></td>
+<td style="text-align: center;">Changes related to code logic, interface changes, performance improvements, etc.</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="note">
+<summary>Workflow-Funtion</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Workflow-Funtion</th>
+<th style="text-align: center;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>PR-title-lint</code></td>
+<td style="text-align: center;">corresponding step: <code>pr_autolabel.yml::labeler::Check PR Title</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>PR-auto-label</code></td>
+<td style="text-align: center;">corresponding step: <code>pr_autolabel.yml::labeler::Label PR</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>badge-update</code></td>
+<td style="text-align: center;">corresponding job: <code>badge_updater.yml::Coverage-Badge</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>lint-format</code></td>
+<td style="text-align: center;">corresponding job: <code>*_test.yml::Lint-Format</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>compatibility-test</code></td>
+<td style="text-align: center;">corresponding job: <code>compatibility_test.yml::Compatibility-Test</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>mini-test</code></td>
+<td style="text-align: center;">corresponding job: <code>minimal_test.yml::Minimal-Test</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>build</code></td>
+<td style="text-align: center;">corresponding job: <code>publish_release.yml::Build-Distribution-Packages</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>publish</code></td>
+<td style="text-align: center;">corresponding job: <code>publish_release.yml::Publish-(Test)PyPI</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>draft-release</code></td>
+<td style="text-align: center;">corresponding job: <code>publish_release.yml::Publish-Release</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>email-notify</code></td>
+<td style="text-align: center;">corresponding step: <code>publish_release.yml::Publish-Release/Cleanup-Tag::Email Notification</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</details>
+<details class="abstract">
+<summary>Subject Line</summary>
+<ul>
+<li>Keep under <strong>72</strong> characters</li>
+<li>Use imperative mood: "Add" not "Added" or "Adds"</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 👍 Good</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>feat:<span class="w"> </span>implement<span class="w"> </span>metric<span class="w"> </span>registry
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># 👎 Avoid</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Implemented<span class="w"> </span>metric<span class="w"> </span>registry
+</code></pre></div>
+</details>
+<details class="abstract">
+<summary>Body (when needed)</summary>
+<ul>
+<li>Wrap text at <strong>80</strong> characters</li>
+<li>Reference issues using <code>closes #123</code> or <code>refs: #123</code></li>
+<li>Explain <strong>what</strong> and <strong>why</strong> rather than <strong>how</strong></li>
+<li>Use ordered or unordered lists in <code>markdown</code> syntax to organize content</li>
+</ul>
+</details>
+<details class="abstract">
+<summary>Footer (when needed)</summary>
+<ul>
+<li>Link pull requests: <code>refs: #45</code></li>
+<li>For breaking changes: <code>BREAKING CHANGE: &lt;description&gt;</code></li>
+</ul>
+</details>
+<hr />
+<h3 id="Best-Practices_1"><strong>Best Practices</strong><a class="headerlink" href="#Best-Practices_1" title="Permanent link">&para;</a></h3>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-7 14h2V5h-4v2h2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Feature Implementation</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 👍 Clear scope and imperative mood</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>feat<span class="o">(</span>metrics<span class="o">)</span>:<span class="w"> </span>add<span class="w"> </span>precision-recall<span class="w"> </span>curve<span class="w"> </span>support
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>-<span class="w"> </span>Implement<span class="w"> </span>curve<span class="w"> </span>plotting<span class="w"> </span><span class="k">for</span><span class="w"> </span>binary<span class="w"> </span>classification<span class="w"> </span>tasks
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>-<span class="w"> </span>Integrate<span class="w"> </span>with<span class="w"> </span>existing<span class="w"> </span>visualization<span class="w"> </span>toolkit
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>closes<span class="w"> </span><span class="c1">#88</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># ----------------------------------------------------------</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># 👎 Vague description</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>Added<span class="w"> </span>some<span class="w"> </span>metrics<span class="w"> </span>stuff
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13h-4v-2h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4v2h4v2h-2a2 2 0 0 0-2 2v4h6m4 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Documentation Update</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 👍 Specific document section reference</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docs<span class="o">(</span>tutorial<span class="o">)</span>:<span class="w"> </span>add<span class="w"> </span>distributed<span class="w"> </span>training<span class="w"> </span>example
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>-<span class="w"> </span>Demonstrate<span class="w"> </span>multi-GPU<span class="w"> </span>usage<span class="w"> </span>with<span class="w"> </span>DDP
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>-<span class="w"> </span>Add<span class="w"> </span>benchmark<span class="w"> </span>results<span class="w"> </span>table
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>refs:<span class="w"> </span><span class="c1">#102</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1"># ----------------------------------------------------------</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># 👎 Vague description</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>docs:<span class="w"> </span>update<span class="w"> </span>docs
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13v-1.5a1.5 1.5 0 0 0-1.5-1.5A1.5 1.5 0 0 0 17 8.5V7a2 2 0 0 0-2-2h-4v2h4v2h-2v2h2v2h-4v2h4a2 2 0 0 0 2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m18-4H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/></svg></span> Test Enhancement</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 👍 Clear test category and edge case</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>test<span class="o">(</span>integrate<span class="o">)</span>:<span class="w"> </span>add<span class="w"> </span>fp16<span class="w"> </span>precision<span class="w"> </span>validation
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>-<span class="w"> </span>Verify<span class="w"> </span>tensor<span class="w"> </span>dtype<span class="w"> </span>conversion<span class="w"> </span><span class="k">in</span><span class="w"> </span>mixed<span class="w"> </span>precision<span class="w"> </span>mode
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>-<span class="w"> </span>Add<span class="w"> </span>tolerance<span class="w"> </span>thresholds<span class="w"> </span><span class="k">for</span><span class="w"> </span>different<span class="w"> </span>hardware
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1"># ----------------------------------------------------------</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1"># 👎 Unclear test scope</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>test:<span class="w"> </span>fix<span class="w"> </span>some<span class="w"> </span>tests
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-6 14h2V5h-2v4h-2V5h-2v6h4M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Code Refactoring</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 👍 Modular improvement explanation</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>refactor<span class="o">(</span>core<span class="o">)</span>:<span class="w"> </span>decouple<span class="w"> </span>metric<span class="w"> </span>calculation<span class="w"> </span>from<span class="w"> </span>IO
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>-<span class="w"> </span>Separate<span class="w"> </span>computation<span class="w"> </span>logic<span class="w"> </span>from<span class="w"> </span>result<span class="w"> </span>saving
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>-<span class="w"> </span>Create<span class="w"> </span>new<span class="w"> </span>ResultHandler<span class="w"> </span>class
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>-<span class="w"> </span>BREAKING<span class="w"> </span>CHANGE:<span class="w"> </span>Remove<span class="w"> </span>save_to_csv<span class="o">()</span><span class="w"> </span>method
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1"># ----------------------------------------------------------</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="c1"># 👎 No scope/benefit explanation</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>refactor:<span class="w"> </span>change<span class="w"> </span>some<span class="w"> </span>code
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13v-2a2 2 0 0 0-2-2h-2V7h4V5h-6v6h4v2h-4v2h4a2 2 0 0 0 2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m18-4H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/></svg></span> Performance Optimization</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 👍 Quantifiable improvement</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>perf<span class="o">(</span>render<span class="o">)</span>:<span class="w"> </span>reduce<span class="w"> </span>tree<span class="w"> </span>visualization<span class="w"> </span>latency<span class="w"> </span>by<span class="w"> </span><span class="m">40</span>%
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>-<span class="w"> </span>Implement<span class="w"> </span>lazy<span class="w"> </span>loading<span class="w"> </span><span class="k">for</span><span class="w"> </span>large<span class="w"> </span>model<span class="w"> </span>structures
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>-<span class="w"> </span>Add<span class="w"> </span>caching<span class="w"> </span>mechanism<span class="w"> </span><span class="k">for</span><span class="w"> </span>common<span class="w"> </span>architectures
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c1"># ----------------------------------------------------------</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1"># 👎 Generic claim</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>perf:<span class="w"> </span>make<span class="w"> </span>it<span class="w"> </span>faster
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 11h2v2h-2m0 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V7h4V5h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2m8 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Maintenance Task</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># 👍 Clear infra context</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>chore<span class="o">(</span>infra<span class="o">)</span>:<span class="w"> </span>migrate<span class="w"> </span>CI<span class="w"> </span>from<span class="w"> </span>Travis<span class="w"> </span>to<span class="w"> </span>GitHub<span class="w"> </span>Actions
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>-<span class="w"> </span>Add<span class="w"> </span>workflow<span class="w"> </span><span class="k">for</span><span class="w"> </span>automated<span class="w"> </span>PyTorch<span class="w"> </span>version<span class="w"> </span>matrix<span class="w"> </span>testing
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>-<span class="w"> </span>Remove<span class="w"> </span>.travis.yml<span class="w"> </span>configuration
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># ----------------------------------------------------------</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># 👎 Ambiguous maintenance</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>chore:<span class="w"> </span>update<span class="w"> </span>files
+</code></pre></div>
+</details>
+<hr />
+<h2 id="Pull-Request-Title"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 15a2 2 0 0 1-2 2H9v-2h4v-2h-2v-2h2V9H9V7h4a2 2 0 0 1 2 2v1.5a1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 1 1.5 1.5zM12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Pull Request Title</strong><a class="headerlink" href="#Pull-Request-Title" title="Permanent link">&para;</a></h2>
+<h3 id="Why-this-matters_2"><strong>Why this matters?</strong><a class="headerlink" href="#Why-this-matters_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>🏷️ Facilitates PR categorization and management.</li>
+<li>✅ Required for merging – Valid titles are enforced by automated checks in our <a href="https://github.com/TorchMeter/torchmeter/blob/master/.github/workflows/pr_autolabel.yml">workflow <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></a>.</li>
+<li>🤖 Enables automated changelog generation for releases – <code>torchmeter</code> use <a href="https://github.com/release-drafter/release-drafter">release-drafter <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></a> to generate release notes based on PR labels.</li>
+</ul>
+<hr />
+<h3 id="Structure_2"><strong>Structure</strong><a class="headerlink" href="#Structure_2" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>&lt;type&gt;[optional scope][optional !]: &lt;subject&gt;
+</code></pre></div>
+<details class="abstract">
+<summary>Type Prefixes</summary>
+<blockquote>
+<p>Most are the same as <a data-preview="data-preview" href="#Structure_1">Commit Message Type Prefixes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></a>, cause the PR will finally be merged as a commit.</p>
+</blockquote>
+<div class="admonition danger">
+<p class="admonition-title">Limitations</p>
+<p>Type prefix <strong>must be one</strong> in the following table, otherwise the PR will be rejected!</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">PR Type</th>
+<th style="text-align: center;">When to Use</th>
+<th style="text-align: center;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>feat</code></td>
+<td style="text-align: center;">New features</td>
+<td style="text-align: center;"><code>feat: add FP16 support</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>fix</code></td>
+<td style="text-align: center;">Bug fixes</td>
+<td style="text-align: center;"><code>fix(core): memory leak</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>perf</code></td>
+<td style="text-align: center;">Performance improvements</td>
+<td style="text-align: center;"><code>perf: optimize rendering</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>depr</code></td>
+<td style="text-align: center;">Deprecations</td>
+<td style="text-align: center;"><code>depr: remove old API</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>docs</code></td>
+<td style="text-align: center;">Documentation updates</td>
+<td style="text-align: center;"><code>docs: add API examples</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>test</code></td>
+<td style="text-align: center;">Test-related changes</td>
+<td style="text-align: center;"><code>test: add edge cases</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ci</code></td>
+<td style="text-align: center;">CI/CD improvements</td>
+<td style="text-align: center;"><code>ci: add GPU testing</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>build</code></td>
+<td style="text-align: center;">Changes related to building</td>
+<td style="text-align: center;"><code>build: update setup.cfg</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>refactor</code></td>
+<td style="text-align: center;">Code restructuring</td>
+<td style="text-align: center;"><code>refactor: clean utils</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>revert</code></td>
+<td style="text-align: center;">Reverted changes</td>
+<td style="text-align: center;"><code>revert: #123 change</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>chore</code></td>
+<td style="text-align: center;">Maintenance tasks</td>
+<td style="text-align: center;"><code>chore: update deps</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<details class="abstract">
+<summary>Scope (Optional)</summary>
+<p>Totally same as <a data-preview="data-preview" href="#Structure_1">Commit Message Scope <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></a>.</p>
+<div class="admonition danger">
+<ul>
+<li>If you don't plan to add a scope, please <strong>don't</strong> leave parentheses in the PR title.</li>
+<li>Scope must <strong>not</strong> be empty or start with a space.</li>
+</ul>
+</div>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 👍 Good</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>fix<span class="o">(</span>core<span class="o">)</span>:<span class="w"> </span>Memory<span class="w"> </span>leak
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># 👎 Avoid</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>fix<span class="o">()</span>:<span class="w"> </span>Memory<span class="w"> </span>leak
+</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># 👍 Good</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>fix<span class="o">(</span>core<span class="o">)</span>:<span class="w"> </span>Memory<span class="w"> </span>leak
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># 👎 Avoid</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>fix<span class="o">(</span><span class="w"> </span><span class="o">)</span>:<span class="w"> </span>Memory<span class="w"> </span>leak
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>fix<span class="o">(</span><span class="w"> </span>core<span class="o">)</span>:<span class="w"> </span>memory<span class="w"> </span>leak
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>Exclamation Mark (<code>!</code>, Optional)</summary>
+<p>A <code>!</code> indicates a breaking change, which means that the PR will <ins class="critic">bring a major version bump</ins>. Therefore, please use it with caution. The PRs denoted by <code>!</code> will undergo a more rigorous review procedure.</p>
+</details>
+<details class="abstract">
+<summary>Subject</summary>
+<blockquote>
+<p>Mostly same as <a data-preview="data-preview" href="#Structure_1">Commit Message Subject <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></a></p>
+</blockquote>
+<ul>
+<li>Keep under <strong>72</strong> characters</li>
+<li>Use imperative mood: <code>Add</code> not <code>Added</code></li>
+<li>Capitalize the initial letter.</li>
+<li>Avoid ending with punctuation</li>
+<li>Not to reference issues/PR/discussion <ins>at beginning</ins></li>
+</ul>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a># 👍 Good
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>fix: memory leak described in #456
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a># 👎 Avoid
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>fix: #456 memory leak
+</code></pre></div>
+</details>
+<hr />
+<h3 id="Best-Practices_2"><strong>Best Practices</strong><a class="headerlink" href="#Best-Practices_2" title="Permanent link">&para;</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Quick Validation</p>
+<p>You can validate your PR title with: <code>bash misc/validate_pr_title.sh '&lt;your-PR-title&gt;'</code></p>
+</div>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-7 14h2V5h-4v2h2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Valid type usage</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># 👍 Proper type</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>feat:<span class="w"> </span>Add<span class="w"> </span>histogram<span class="w"> </span>visualization
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># 👎 Invalid type</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>feats:<span class="w"> </span>Add<span class="w"> </span>histogram<span class="w"> </span>visualization
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13h-4v-2h2a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4v2h4v2h-2a2 2 0 0 0-2 2v4h6m4 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Valid Scope Usage</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># 👍 Proper scoping</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>feat<span class="o">(</span>metrics<span class="o">)</span>:<span class="w"> </span>Add<span class="w"> </span>histogram<span class="w"> </span>visualization
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># 👎 Empty parentheses</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>feat<span class="o">()</span>:<span class="w"> </span>Add<span class="w"> </span>new<span class="w"> </span>feature
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># 👎 Space in scrpe beginning</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>feat<span class="o">(</span><span class="w"> </span><span class="o">)</span>:<span class="w"> </span>Add<span class="w"> </span>new<span class="w"> </span>feature
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>feat<span class="o">(</span><span class="w"> </span>core<span class="o">)</span>:<span class="w"> </span>Add<span class="w"> </span>new<span class="w"> </span>feature
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13v-1.5a1.5 1.5 0 0 0-1.5-1.5A1.5 1.5 0 0 0 17 8.5V7a2 2 0 0 0-2-2h-4v2h4v2h-2v2h2v2h-4v2h4a2 2 0 0 0 2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m18-4H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/></svg></span> Space before Subject</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># 👍 Only one space before subject line</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>refactor:<span class="w"> </span>Remove<span class="w"> </span>deprecated<span class="w"> </span>methods
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1"># 👎 no/more than one space</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>refactor:Remove<span class="w"> </span>deprecated<span class="w"> </span>methods
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>refactor:<span class="w">  </span>Remove<span class="w"> </span>deprecated<span class="w"> </span>methods
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 17H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m-6 14h2V5h-2v4h-2V5h-2v6h4M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Capitalize the Beginning of Subject</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 👍 Capitalized.</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>refactor:<span class="w"> </span>Remove<span class="w"> </span>deprecated<span class="w"> </span>methods
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># 👎 Not been capitalized</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>refactor:<span class="w"> </span>remove<span class="w"> </span>deprecated<span class="w"> </span>methods
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 13v-2a2 2 0 0 0-2-2h-2V7h4V5h-6v6h4v2h-4v2h4a2 2 0 0 0 2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3m18-4H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/></svg></span> Imperative Mood</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 👍 Correct imperative form</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>fix<span class="o">(</span>core<span class="o">)</span>:<span class="w"> </span>Resolve<span class="w"> </span>memory<span class="w"> </span>leak
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># 👎 Past tense usage</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>fix<span class="o">(</span>core<span class="o">)</span>:<span class="w"> </span>Memory<span class="w"> </span>leak<span class="w"> </span>resolved
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 11h2v2h-2m0 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V7h4V5h-4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2m8 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Reference Placement</summary>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a># 👍 Proper reference position
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>docs: Update installation guide (closes #123)
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a># 👎 Error position
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>docs(#123): Update installation guide
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>docs: #123 Update installation guide
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m13 15 4-8V5h-6v2h4l-4 8m10 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Length Control</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># 👍 Concise title (68 chars)</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>perf<span class="o">(</span>render<span class="o">)</span>:<span class="w"> </span>Optimize<span class="w"> </span>tree<span class="w"> </span>rendering<span class="w"> </span>latency<span class="w"> </span>using<span class="w"> </span>lazy-load
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># 👎 Overly long title (89 chars)</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>perf<span class="o">(</span>render<span class="o">)</span>:<span class="w"> </span>Implement<span class="w"> </span>multiple<span class="w"> </span>optimization<span class="w"> </span>techniques<span class="w"> </span>including<span class="w"> </span>lazy-load<span class="w"> </span>and<span class="w"> </span>caching<span class="w"> </span><span class="k">for</span><span class="w"> </span>tree<span class="w"> </span>rendering
+</code></pre></div>
+</details>
+<details class="success">
+<summary><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 11h2v2h-2m0-6h2v2h-2m0 6h2a2 2 0 0 0 2-2v-1.5a1.5 1.5 0 0 0-1.5-1.5A1.5 1.5 0 0 0 17 8.5V7a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 0 1.5 1.5 1.5 1.5 0 0 0-1.5 1.5V13a2 2 0 0 0 2 2m8 2H7V3h14m0-2H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M3 5H1v16a2 2 0 0 0 2 2h16v-2H3z"/></svg></span> Punctuation Rules</summary>
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 👍 Clean ending</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>chore<span class="o">(</span>ci<span class="o">)</span>:<span class="w"> </span>Migrate<span class="w"> </span>to<span class="w"> </span>GitHub<span class="w"> </span>Actions
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1"># 👎 Trailing punctuation</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>chore<span class="o">(</span>ci<span class="o">)</span>:<span class="w"> </span>Update<span class="w"> </span>CI<span class="w"> </span>configuration.
+</code></pre></div>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <a href="https://github.com/TorchMeter" target="_blank">© 2025 TorchMeter</a> All rights reserved.
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/TorchMeter/torchmeter/discussions" target="_blank" rel="noopener" title="Community" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M208 352c114.9 0 208-78.8 208-176S322.9 0 208 0 0 78.8 0 176c0 38.6 14.7 74.3 39.6 103.4-3.5 9.4-8.7 17.7-14.2 24.7-4.8 6.2-9.7 11-13.3 14.3-1.8 1.6-3.3 2.9-4.3 3.7-.5.4-.9.7-1.1.8l-.2.2C1 327.2-1.4 334.4.8 340.9S9.1 352 16 352c21.8 0 43.8-5.6 62.1-12.5 9.2-3.5 17.8-7.4 25.2-11.4C134.1 343.3 169.8 352 208 352m240-176c0 112.3-99.1 196.9-216.5 207 24.3 74.4 104.9 129 200.5 129 38.2 0 73.9-8.7 104.7-23.9 7.5 4 16 7.9 25.2 11.4 18.3 6.9 40.3 12.5 62.1 12.5 6.9 0 13.1-4.5 15.2-11.1s-.2-13.8-5.8-17.9l-.2-.2c-.2-.2-.6-.4-1.1-.8-1-.8-2.5-2-4.3-3.7-3.6-3.3-8.5-8.1-13.3-14.3-5.5-7-10.7-15.4-14.2-24.7 24.9-29 39.6-64.7 39.6-103.4 0-92.8-84.9-168.9-192.6-175.5.4 5.1.6 10.3.6 15.5z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/TorchMeter/torchmeter" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://pypi.org/project/torchmeter/" target="_blank" rel="noopener" title="PyPI" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6M286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3M167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4m-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/TorchMeter/torchmeter/blob/master/LICENSE" target="_blank" rel="noopener" title="License" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M384 32h128c17.7 0 32 14.3 32 32s-14.3 32-32 32H398.4c-5.2 25.8-22.9 47.1-46.4 57.3V448h160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32-14.3-32-32s14.3-32 32-32h160V153.3c-23.5-10.3-41.2-31.6-46.4-57.3H128c-17.7 0-32-14.3-32-32s14.3-32 32-32h128c14.6-19.4 37.8-32 64-32s49.4 12.6 64 32m55.6 288h144.9L512 195.8zm72.4 96c-62.9 0-115.2-34-126-78.9-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8L631.3 305c5.7 9.8 9.3 21.1 6.7 32.1C627.2 382 574.9 416 512 416M126.8 195.8 54.4 320h144.9zM.9 337.1c-2.6-11 1-22.3 6.7-32.1l95.2-163.2c5-8.6 14.2-13.8 24.1-13.8s19.1 5.3 24.1 13.8L246.2 305c5.7 9.8 9.3 21.1 6.7 32.1C242 382 189.7 416 126.8 416S11.7 382 .9 337.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.view", "content.code.annotate", "content.code.copy", "content.code.annotate", "content.tooltips", "content.tabs.link", "search.share", "search.suggest", "search.highlight", "toc.follow", "navigation.top", "navigation.tabs", "navigation.path", "navigation.tabs.sticky", "navigation.prune", "navigation.tracking", "navigation.instant", "navigation.instant.preview", "navigation.instant.progress", "navigation.indexes", "navigation.sections"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
