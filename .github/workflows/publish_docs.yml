@@ -12,9 +12,10 @@ on:
         default: 'torchmeter'
         required: true
         type: string
-  # schedule:
-  #   # Runs every day at 00:00 UTC
-  #   - cron: "0 0 * * *"
+  
+  schedule:
+    # Runs every day at 00:00 UTC
+    - cron: "0 0 * * *"
 
 permissions:
   contents: write
