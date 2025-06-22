@@ -1627,8 +1627,11 @@ Repo: https://github.com/TorchMeter/torchmeter
 </ul>
 <hr />
 <h3 id="Structure_2"><strong>Structure</strong><a class="headerlink" href="#Structure_2" title="Permanent link">&para;</a></h3>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>&lt;type&gt;[optional scope][optional !]: &lt;subject&gt;
+<div class="language-bash highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>&lt;type&gt;<span class="o">[</span>optional<span class="w"> </span>scope<span class="o">][</span>optional<span class="w"> </span>!<span class="o">]</span>:<span class="w"> </span>&lt;subject&gt;<span class="w"> </span><span class="c1"># (1)</span>
 </code></pre></div>
+<ol>
+<li>Note: there is <strong>one space</strong> between the <code>:</code> and the subject❗️</li>
+</ol>
 <details class="abstract">
 <summary>Type Prefixes</summary>
 <blockquote>
@@ -1636,7 +1639,7 @@ Repo: https://github.com/TorchMeter/torchmeter
 </blockquote>
 <div class="admonition danger">
 <p class="admonition-title">Limitations</p>
-<p>Type prefix <strong>must be one</strong> in the following table, otherwise the PR will be rejected!</p>
+<p>Type prefix <strong>must be one</strong> in the following table, otherwise the PR will be <strong>rejected</strong>!</p>
 <table>
 <thead>
 <tr>
@@ -1725,12 +1728,12 @@ Repo: https://github.com/TorchMeter/torchmeter
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># 👎 Avoid</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>fix<span class="o">(</span><span class="w"> </span><span class="o">)</span>:<span class="w"> </span>Memory<span class="w"> </span>leak
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>fix<span class="o">(</span><span class="w"> </span>core<span class="o">)</span>:<span class="w"> </span>memory<span class="w"> </span>leak
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>fix<span class="o">(</span><span class="w"> </span>core<span class="o">)</span>:<span class="w"> </span>Memory<span class="w"> </span>leak
 </code></pre></div>
 </details>
 <details class="warning">
 <summary>Exclamation Mark (<code>!</code>, Optional)</summary>
-<p>A <code>!</code> indicates a breaking change, which means that the PR will <ins class="critic">bring a major version bump</ins>. Therefore, please use it with caution. The PRs denoted by <code>!</code> will undergo a more rigorous review procedure.</p>
+<p>A <code>!</code> indicates a <strong>breaking change</strong>, which means that the PR will <ins class="critic">bring a major version bump</ins>. Therefore, please use it <ins>with caution</ins>. The PRs denoted by <code>!</code> will <ins>undergo a more rigorous review procedure</ins>.</p>
 </details>
 <details class="abstract">
 <summary>Subject</summary>
@@ -1745,10 +1748,10 @@ Repo: https://github.com/TorchMeter/torchmeter
 <li>Not to reference issues/PR/discussion <ins>at beginning</ins></li>
 </ul>
 <div class="language-text highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a># 👍 Good
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>fix: memory leak described in #456
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>fix: Memory leak described in #456
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a># 👎 Avoid
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>fix: #456 memory leak
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>fix: #456 Memory leak
 </code></pre></div>
 </details>
 <hr />

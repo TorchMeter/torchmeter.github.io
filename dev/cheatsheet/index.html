@@ -1082,7 +1082,8 @@ You can view it in a hierarchical way via:</p>
 <h2 id="Tree-Level-Index"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2v2h4v2H9v-4a2 2 0 0 1 2-2h2V9H9zm3-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Tree Level Index</strong><a class="headerlink" href="#Tree-Level-Index" title="Permanent link">&para;</a></h2>
 <h3 id="What-is-the-tree-level-index"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 17h-2V9h-2V7h4m5-4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span> What is the tree level index?</strong><a class="headerlink" href="#What-is-the-tree-level-index" title="Permanent link">&para;</a></h3>
 <p>As the name implies, it is the hierarchical index of a operation tree. </p>
-<p>Actually, the level index of a tree node equals to <code>len(tree_node.node_id.split('.'))</code></p>
+<p>Figuratively, within the model operation tree, <ins>each guide line represents a level</ins>. The level index value commences from <strong>0</strong> and increments from left to right.</p>
+<p>Additionally, the level index at which a tree node is mounted is equal to <code>len(tree_node.node_id.split('.'))</code>. For instance, the node <code>(1.1.6.2) 1 BatchNorm2d</code> below is mounted at level 4.</p>
 <div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>AnyNet
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── (1) layers Sequential
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│   ├── (1.1) 0 BasicBlock
@@ -1105,17 +1106,17 @@ You can view it in a hierarchical way via:</p>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>↑   ↑   ↑   ↑
 <a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>0   1   2   3
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>0   1   2   3  (level index, each pointing to a guide line)
 </code></pre></div>
 <h3 id="How-to-use-the-tree-level-index"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 10.5a1.5 1.5 0 0 1-1.5 1.5c.84 0 1.5.67 1.5 1.5V15c0 1.11-.89 2-2 2H9v-2h4v-2h-2v-2h2V9H9V7h4c1.11 0 2 .89 2 2m4-6H5c-1.09 0-2 .9-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span> How to use the tree level index?</strong><a class="headerlink" href="#How-to-use-the-tree-level-index" title="Permanent link">&para;</a></h3>
 <p>A valid level index empowers you to customize the operation tree with meticulous precision.
 <code>torchmeter</code> regards the following value as a valid tree level index:</p>
 <ol>
-<li>A non-negative integer (e.g. <code>0</code>, <code>1</code>, <code>2</code>, ...): The configurations under a specific index apply only to the corresponding level.</li>
-<li><code>default</code>: The configurations under this index will be applied to all undefined levels.</li>
-<li><code>all</code>: The configurations under this index will be applied to all levels.</li>
+<li><strong>A non-negative integer (e.g. <code>0</code>, <code>1</code>, <code>2</code>, ...)</strong>: The configurations under a specific index apply only to the corresponding level.</li>
+<li><strong><code>default</code></strong>: The configurations under this index will be applied to all undefined levels.</li>
+<li><strong><code>all</code></strong>: The configurations under this index will be applied to all levels.</li>
 </ol>
-<p>Please refer to <a class="md-button" href="../demo/##fb1-customize-the-hierarchical-display">Customize the Hierarchical Display</a> for specific usage scenarios.</p>
+<p>Please refer to <a class="md-button" href="https://docs.torchmeter.top/latest/demo/#fb1-customize-the-hierarchical-display">Customize the Hierarchical Display</a> for specific usage scenarios.</p>
 <hr />
 <h2 id="Tree-Node-Attributes"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 15a2 2 0 0 1-2 2H9v-2h4v-2h-2v-2h2V9H9V7h4a2 2 0 0 1 2 2v1.5a1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 1 1.5 1.5zM12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Tree Node Attributes</strong><a class="headerlink" href="#Tree-Node-Attributes" title="Permanent link">&para;</a></h2>
 <h3 id="What-is-a-tree-node-attribute"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 17h-2V9h-2V7h4m5-4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"/></svg></span> What is a tree node attribute?</strong><a class="headerlink" href="#What-is-a-tree-node-attribute" title="Permanent link">&para;</a></h3>
@@ -1646,7 +1647,7 @@ while the <code>childs</code> is an orderdict with node id as key and the node i
 <tr>
 <td style="text-align: center;"><code>node_id</code></td>
 <td style="text-align: center;"><code>str</code></td>
-<td style="text-align: center;">A globally unique module identifier, <br>formatted as <code>&lt;parent-node-identifier&gt;.&lt;current-level-index&gt;</code>. <br>The index commences from <code>1</code>, cause the root is denoted as <code>0</code></td>
+<td style="text-align: center;">A globally unique module identifier, <br>formatted as <code>&lt;parent-node-id&gt;.&lt;node-number-in-current-level&gt;</code>. <br>The index commences from <code>1</code>, cause the root is denoted as <code>0</code></td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>is_leaf</code></td>
@@ -1723,7 +1724,7 @@ which enables the <ins>dynamic retrieval of its value</ins> during the tree-rend
 <h2 id="Unit-Explanation"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v4h2V7h2v10h-2v-4H9zm3-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"/></svg></span> Unit Explanation</strong><a class="headerlink" href="#Unit-Explanation" title="Permanent link">&para;</a></h2>
 <p>There are four types of units in <code>torchmeter</code>, listed as follows:</p>
 <div class="admonition note">
-<p>The <code>raw-data</code> tag in the subsequent content indicates that the unit marked with this tag is used in the <code>raw data</code> mode</p>
+<p>The <code>raw-data</code> tag in the subsequent content indicates that the unit marked with this tag is used in the <a href="https://docs.torchmeter.top/latest/demo/#i1-raw-data-mode"><code>raw data</code> mode <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"/></svg></span></a></p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m0 2v12h7V6zm16 12V6h-1.24c.24.54.19 1.07.19 1.13-.07.67-.54 1.37-.71 1.62l-2.33 2.55 3.32-.02.01 1.22-5.2-.03-.04-1s3.05-3.23 3.2-3.52c.14-.28.71-1.95-.7-1.95-1.23.05-1.09 1.3-1.09 1.3l-1.54.01s.01-.66.38-1.31H13v12h2.58l-.01-.86.97-.01s.91-.16.92-1.05c.04-1-.81-1-.96-1-.13 0-1.07.05-1.07.87h-1.52s.04-2.06 2.59-2.06c2.6 0 2.46 2.02 2.46 2.02s.04 1.25-1.11 1.72l.52.37zM8.92 16h-1.5v-5.8l-1.8.56V9.53l3.14-1.12h.16z"/></svg></span> Counting Units</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 96c0-35.3 28.7-64 64-64h320c35.3 0 64 28.7 64 64v320c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm144 4c-24.3 0-44 19.7-44 44v48c0 24.3 19.7 44 44 44h32c24.3 0 44-19.7 44-44v-48c0-24.3-19.7-44-44-44zm-4 44c0-2.2 1.8-4 4-4h32c2.2 0 4 1.8 4 4v48c0 2.2-1.8 4-4 4h-32c-2.2 0-4-1.8-4-4zm140-44c-11 0-20 9-20 20 0 9.7 6.9 17.7 16 19.6V216c0 11 9 20 20 20s20-9 20-20v-96c0-11-9-20-20-20zM132 296c0 9.7 6.9 17.7 16 19.6V392c0 11 9 20 20 20s20-9 20-20v-96c0-11-9-20-20-20h-16c-11 0-20 9-20 20m96 24v48c0 24.3 19.7 44 44 44h32c24.3 0 44-19.7 44-44v-48c0-24.3-19.7-44-44-44h-32c-24.3 0-44 19.7-44 44m44-4h32c2.2 0 4 1.8 4 4v48c0 2.2-1.8 4-4 4h-32c-2.2 0-4-1.8-4-4v-48c0-2.2 1.8-4 4-4"/></svg></span> Binary Storage Units</label><label for="__tabbed_1_3"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 17a1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1 1 1 0 0 0-1 1m0-14v4h2V5.08c3.39.49 6 3.39 6 6.92a7 7 0 0 1-7 7 7 7 0 0 1-7-7c0-1.68.59-3.22 1.58-4.42L12 13l1.41-1.41-6.8-6.8v.02C4.42 6.45 3 9.05 3 12a9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9m6 9a1 1 0 0 0-1-1 1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1M6 12a1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1 1 1 0 0 0-1 1"/></svg></span> Time Units</label><label for="__tabbed_1_4"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16a3 3 0 0 1-3-3c0-1.12.61-2.1 1.5-2.61l9.71-5.62-5.53 9.58c-.5.98-1.51 1.65-2.68 1.65m0-13c1.81 0 3.5.5 4.97 1.32l-2.1 1.21C14 5.19 13 5 12 5a8 8 0 0 0-8 8c0 2.21.89 4.21 2.34 5.65h.01c.39.39.39 1.02 0 1.41s-1.03.39-1.42.01A9.97 9.97 0 0 1 2 13 10 10 0 0 1 12 3m10 10c0 2.76-1.12 5.26-2.93 7.07-.39.38-1.02.38-1.41-.01a.996.996 0 0 1 0-1.41A7.95 7.95 0 0 0 20 13c0-1-.19-2-.54-2.9L20.67 8C21.5 9.5 22 11.18 22 13"/></svg></span> Inference Speed Units</label></div>
 <div class="tabbed-content">
@@ -1896,25 +1897,25 @@ which enables the <ins>dynamic retrieval of its value</ins> during the tree-rend
 </tr>
 <tr>
 <td style="text-align: center;"><code>KIPS</code></td>
-<td style="text-align: center;"><span class="arithmatex">\(10^3\)</span> IPS</td>
+<td style="text-align: center;"><span class="arithmatex">\(10^3\)</span> <code>IPS</code></td>
 <td style="text-align: center;"></td>
 <td style="text-align: left;"><code>5 KIPS</code>: process <code>5,000</code> inputs per second</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>MIPS</code></td>
-<td style="text-align: center;"><span class="arithmatex">\(10^6\)</span> IPS</td>
+<td style="text-align: center;"><span class="arithmatex">\(10^6\)</span> <code>IPS</code></td>
 <td style="text-align: center;"></td>
 <td style="text-align: left;"><code>5 MIPS</code>: process <code>5,000,000</code> inputs per second</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>GIPS</code></td>
-<td style="text-align: center;"><span class="arithmatex">\(10^9\)</span> IPS</td>
+<td style="text-align: center;"><span class="arithmatex">\(10^9\)</span> <code>IPS</code></td>
 <td style="text-align: center;"></td>
 <td style="text-align: left;"><code>5 GIPS</code>: process <code>5,000,000,000</code> inputs per second</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>TIPS</code></td>
-<td style="text-align: center;"><span class="arithmatex">\(10^{12}\)</span> IPS</td>
+<td style="text-align: center;"><span class="arithmatex">\(10^{12}\)</span> <code>IPS</code></td>
 <td style="text-align: center;"></td>
 <td style="text-align: left;"><code>5 TIPS</code>: process <code>5,000,000,000,000</code> inputs per second</td>
 </tr>
