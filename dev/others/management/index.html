@@ -1127,6 +1127,15 @@ Repo: https://github.com/TorchMeter/torchmeter
 <p>Promise the PR has a valid title and pass the compatiability tests.</p>
 </li>
 <li>
+<p><strong>Manually trigger ✅ Compatibility Test ❌</strong> <mark class="critic">[Optional, do only when essential files changed]</mark></p>
+<p>If the changes brought by the PR are related to the following aspects, manually trigger <code>compatibility_test.yml</code> workflow, and <ins class="critic">make sure the compatibility test passes</ins>:</p>
+<ul>
+<li>source code (<code>torchmeter/</code>)</li>
+<li>test code (<code>tests/</code>)</li>
+<li>configuration files(<code>requirements.txt</code>, <code>default_cfg.yml</code>, <code>pyproject.toml</code>, <code>setup.cfg</code>, <code>setup.py</code>)</li>
+</ul>
+</li>
+<li>
 <p><strong>Update coverage badge in <code>README.md</code> before merging</strong>:</p>
 <ul>
 <li>Right-click coverage badge in PR's comment → Copy link  </li>
