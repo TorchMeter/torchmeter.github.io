@@ -1110,7 +1110,7 @@ You can view it in a hierarchical way via:</p>
 <ol>
 <li><strong>A non-negative integer (e.g. <code>0</code>, <code>1</code>, <code>2</code>, ...)</strong>: The configurations under a specific index apply only to the corresponding level.</li>
 <li><strong><code>default</code></strong>: The configurations under this index will be applied to all undefined levels.</li>
-<li><strong><code>all</code></strong>: The configurations under this index will be applied to all levels.</li>
+<li><strong><code>all</code></strong>: The configurations under this index will <strong>override</strong> those at any other level, and will be applied with the highest priority <strong>across all levels</strong>. </li>
 </ol>
 <p>Please refer to <a class="md-button" href="https://docs.torchmeter.top/latest/demo/#fb1-customize-the-hierarchical-display">Customize the Hierarchical Display</a> for specific usage scenarios.</p>
 <hr>
@@ -1131,7 +1131,7 @@ You can view it in a hierarchical way via:</p>
 <p>All the attributes that are available, as defined below, are intended to:</p>
 <ul>
 <li>facilitate your acquisition of supplementary information of a tree node;</li>
-<li>customize of the display of the tree structure during the rendering procedure. </li>
+<li>customize the display of the tree structure during the rendering procedure. </li>
 </ul>
 <h3 id="What-are-the-available-attributes-of-a-tree-node"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 10.5a1.5 1.5 0 0 1-1.5 1.5c.84 0 1.5.67 1.5 1.5V15c0 1.11-.89 2-2 2H9v-2h4v-2h-2v-2h2V9H9V7h4c1.11 0 2 .89 2 2m4-6H5c-1.09 0-2 .9-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"></path></svg></span> What are the available attributes of a tree node?</strong><a class="headerlink" href="#What-are-the-available-attributes-of-a-tree-node" title="Permanent link">¶</a></h3>
 <details class="example">
@@ -1678,43 +1678,47 @@ while the <code>childs</code> is an orderdict with node id as key and the node i
 </tbody>
 </table>
 <h3 id="How-to-use-the-attributes-of-a-tree-node"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15 17h-2v-4H9V7h2v4h2V7h2m4-4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2"></path></svg></span> How to use the attributes of a tree node?</strong><a class="headerlink" href="#How-to-use-the-attributes-of-a-tree-node" title="Permanent link">¶</a></h3>
-<p>In the scenarios described below, an attribute of a tree node can be utilized as a <ins class="critic">placeholder</ins>, 
-which enables the <ins>dynamic retrieval of its value</ins> during the tree-rendering process.</p>
-<details class="info">
-<summary>Global Configuration</summary>
-<blockquote>
-<p>About the <code>&lt;level-index&gt;</code> shown below, please refer to <a href="#Tree-Level-Index">Tree Level Index <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"></path></svg></span></a>.</p>
-</blockquote>
+<p>An attribute of a tree node can be employed as a <ins class="critic">placeholder</ins> within the value of certain configurations. This allows for the <ins><strong>dynamic retrieval of the attribute value</strong></ins> during the tree-rendering procedure.</p>
+<p>The configurations/scenario supporting the tree node attribute as a placeholder are listed below.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">configuration</th>
-<th style="text-align: center;">default value</th>
+<th style="text-align: center;">configuration/scenario</th>
+<th style="text-align: center;">Default Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><code>tree_repeat_block_args</code></td>
+<td style="text-align: center;"><code>tree_levels_args.[level-index].label</code><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></td>
+<td style="text-align: center;"><code>'[b gray35](&lt;node_id&gt;) [green]&lt;name&gt;[/green] [cyan]&lt;type&gt;[/]'</code><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>tree_repeat_block_args.title</code></td>
 <td style="text-align: center;"><code>'[i]Repeat [[b]&lt;repeat_time&gt;[/b]] Times[/]'</code></td>
 </tr>
 <tr>
-<td style="text-align: center;"><code>tree_levels_args.default.label</code></td>
-<td style="text-align: center;"><code>'[b gray35](&lt;node_id&gt;) [green]&lt;name&gt;[/green] [cyan]&lt;type&gt;[/]'</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>tree_levels_args.0.label</code></td>
-<td style="text-align: center;"><code>'[b light_coral]&lt;name&gt;[/]'</code></td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>tree_levels_args.&lt;level-index&gt;.label</code></td>
-<td style="text-align: center;">same as the <code>tree_levels_args.default.label</code> if not specified</td>
+<td style="text-align: center;"><code>tree_renderer.repeat_footer</code></td>
+<td style="text-align: center;">Support text and function, see <a href="../demo/#fb23-customize-the-footer">Customize the footer <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"></path></svg></span></a></td>
 </tr>
 </tbody>
 </table>
-</details>
 <details class="info">
-<summary>Repeat Block Footer</summary>
-<p>Please refer to <a class="md-button" href="../demo/#fb23-customize-the-footer">Customize the footer</a> for more details.</p>
+<summary>Usage Example</summary>
+<p>For example, if you want to unify the titles of all repeated blocks into bold <code>My Repeat Title</code>, then you can do this</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich</span><span class="w"> </span><span class="kn">import</span> <span class="nb">print</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torchmeter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Meter</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torchvision</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">resnet18</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">()</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Meter</span><span class="p">(</span><span class="n">resnet18</span><span class="p">)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">model</span><span class="o">.</span><span class="n">tree_repeat_block_args</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">'[b]My Repeat Title[/b]'</span> <span class="c1">#(1)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span> 
+</code></pre></div>
+<ol>
+<li>🙋‍♂️ That's all, then you can see the titles in all repeat blocks have been changed</li>
+</ol>
 </details>
 <hr>
 <h2 id="Unit-Explanation"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 7h2v4h2V7h2v10h-2v-4H9zm3-5a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2m0 2a8 8 0 0 0-8 8 8 8 0 0 0 8 8 8 8 0 0 0 8-8 8 8 0 0 0-8-8"></path></svg></span> Unit Explanation</strong><a class="headerlink" href="#Unit-Explanation" title="Permanent link">¶</a></h2>
@@ -1822,6 +1826,26 @@ which enables the <ins>dynamic retrieval of its value</ins> during the tree-rend
 <blockquote>
 <p>Used by <code>ittp</code> - inference time</p>
 </blockquote>
+<details class="question">
+<summary>Why do I obtain different results with different attempts or inputs?</summary>
+<p>Don't worry, it's a normal phenomenon.</p>
+<dl>
+<dt><strong>Different results with different attempts</strong></dt>
+<dd>
+<p>Inference latency is measured in <strong>real-time</strong> because it is related to dynamic factors such as the <ins>real-time load of the machine</ins> and the <ins>device where the model is located</ins>. Therefore, each time the <code>ittp</code> attribute (i.e., <code>Meter(your_model).ittp</code>) is accessed, the inference latency and throughput will be <strong>re-measured</strong> to reflect the model performance under the current working conditions.</p>
+</dd>
+<dt><strong>Different results with different inputs</strong></dt>
+<dd>
+<p>The meaning of inference latency is <ins><code>the time it takes for the model to complete one forward propagation with the given input</code></ins>. Therefore, <strong>different inputs will bring different workloads to the model</strong>, resulting in differences in inference lantency.</p>
+</dd>
+<dd>
+<p>In <code>TorchMete</code>, the measurement of inference latency and throughput will be based on the input received by the model in the <strong>most recent</strong> forward propagation. Hence, <strong>different input batches</strong> or <strong>different sample shape</strong>, combined with <strong>differences in machine load</strong> at different times, will lead to changes in inference latency.</p>
+</dd>
+</dl>
+<blockquote>
+<p>It should be additionally mentioned that due to automatic device synchronization, the input will be synchronized to the device where the model is located before the forward propagation is executed, so the results obtained from two inputs of the same content on different devices will be very similar.</p>
+</blockquote>
+</details>
 <table>
 <thead>
 <tr>
@@ -1875,6 +1899,62 @@ which enables the <ins>dynamic retrieval of its value</ins> during the tree-rend
 <blockquote>
 <p>Used by <code>ittp</code> - throughput</p>
 </blockquote>
+<details class="question">
+<summary>What is the meaning of <code>Input</code> in the table below?</summary>
+<p><code>Input</code> refers to <ins class="critic">all the inputs</ins> received by the model in your <strong>last</strong> execution of forward propagation. <code>Torchmeter</code> will treat these inputs as a <ins><strong>standard unit</strong></ins> to calculate the inference latency and throughput.</p>
+<p>To facilitate comparisons between models, we call for using the same input <em>(such as a single sample with <code>batch_size=1</code>)</em> for different models when measuring all statistics, in order to obtain more universally comparable results.</p>
+<p>In the following example, <code>Input</code> in <code>Case 1</code> refers to <code>x=torch.randn(1, 3, 224, 224); y=0.1</code>, while in <code>Case 2</code>, it refers to <code>x=torch.randn(100, 3, 224, 224); y=0.1</code>. You can see the difference between two cases from the results: the inference latency when <code>batch_size=100</code> is significantly higher than that when <code>batch_size=1</code>.</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">rich</span><span class="w"> </span><span class="kn">import</span> <span class="nb">print</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torchmeter</span><span class="w"> </span><span class="kn">import</span> <span class="n">Meter</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torchvision</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">ExampleModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">ExampleModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">backbone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">()</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backbone</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="n">model</span> <span class="o">=</span> <span class="n">Meter</span><span class="p">(</span><span class="n">ExampleModel</span><span class="p">(),</span> <span class="n">device</span><span class="o">=</span><span class="s2">"cuda"</span><span class="p">)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1"># case1: batch size = 1 ------------------------------</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="n">ipt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">model</span><span class="p">(</span><span class="n">ipt</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">ittp</span><span class="p">)</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="c1"># case2: batch size = 100 ------------------------------</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="n">ipt</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="n">model</span><span class="p">(</span><span class="n">ipt</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">ittp</span><span class="p">)</span>
+</code></pre></div>
+<div class="result" markdown>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Result of Case 1</label><label for="__tabbed_2_2">Result of Case 2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>InferTime_Throughput_INFO
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>•   Operation_Id = 0
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>• Operation_Name = ExampleModel
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>• Operation_Type = ExampleModel
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>•     Infer_Time = 2.20 ms ± 19.53 us
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>•     Throughput = 454.31 IPS ± 4.03 IPS
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>InferTime_Throughput_INFO
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>•   Operation_Id = 0
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>• Operation_Name = ExampleModel
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>• Operation_Type = ExampleModel
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>•     Infer_Time = 11.38 ms ± 8.30 us
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>•     Throughput = 87.86 IPS ± 0.06
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</details>
 <table>
 <thead>
 <tr>
@@ -1919,6 +1999,17 @@ which enables the <ins>dynamic retrieval of its value</ins> during the tree-rend
 </table>
 </div>
 </div>
+</div>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>As for the value of <code>[level-index]</code>, please refer to <a href="#Tree-Level-Index">Tree Level Index <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"></path></svg></span></a>.&nbsp;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>The <a href="https://rich.readthedocs.io/en/latest/markup.html">style markup <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"></path></svg></span></a> and its <a href="https://rich.readthedocs.io/en/latest/style.html#defining-styles">abbreviation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.59 13.41c.41.39.41 1.03 0 1.42-.39.39-1.03.39-1.42 0a5.003 5.003 0 0 1 0-7.07l3.54-3.54a5.003 5.003 0 0 1 7.07 0 5.003 5.003 0 0 1 0 7.07l-1.49 1.49c.01-.82-.12-1.64-.4-2.42l.47-.48a2.98 2.98 0 0 0 0-4.24 2.98 2.98 0 0 0-4.24 0l-3.53 3.53a2.98 2.98 0 0 0 0 4.24m2.82-4.24c.39-.39 1.03-.39 1.42 0a5.003 5.003 0 0 1 0 7.07l-3.54 3.54a5.003 5.003 0 0 1-7.07 0 5.003 5.003 0 0 1 0-7.07l1.49-1.49c-.01.82.12 1.64.4 2.43l-.47.47a2.98 2.98 0 0 0 0 4.24 2.98 2.98 0 0 0 4.24 0l3.53-3.53a2.98 2.98 0 0 0 0-4.24.973.973 0 0 1 0-1.42"></path></svg></span></a> in <code>rich</code> is supported in writing value content.&nbsp;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
 </div>
 
 
