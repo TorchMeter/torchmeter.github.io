@@ -1320,6 +1320,7 @@ Repo: https://github.com/TorchMeter/torchmeter
     <div class="doc doc-contents first">
 
 
+
         <p>A comprehensive instrumentation tool for PyTorch model performance analysis and visualization.</p>
 <p>The <code>Meter</code> class provides end-to-end measurement capabilities for neural networks, including
 <strong>parameter statistics</strong>, <strong>computational cost analysis</strong>, <strong>memory usage tracking</strong>, <strong>inference time</strong> and
@@ -1936,7 +1937,7 @@ with native model operations.</p>
 
 
 
-                  <details class="quote">
+                  <details class="mkdocstrings-source">
                     <summary>Source code in <code>torchmeter/core.py</code></summary>
                     <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-185" name="__codelineno-0-185"></a><a href="#__codelineno-0-185"><span class="linenos" data-linenos="185 "></span></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tc_device</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-186" name="__codelineno-0-186"></a><a href="#__codelineno-0-186"><span class="linenos" data-linenos="186 "></span></a><span class="w">    </span><span class="sd">"""Initialize a Meter instance for model performance measurement and visualization.</span>
@@ -3182,7 +3183,7 @@ all subsequent tree renderings until explicitly modified.</p>
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-259" name="__codelineno-0-259"></a><a href="#__codelineno-0-259"><span class="linenos" data-linenos="259 "></span></a><span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <a id="__codelineno-0-260" name="__codelineno-0-260"></a><a href="#__codelineno-0-260"><span class="linenos" data-linenos="260 "></span></a><span class="w">    </span><span class="sd">"""Execute model inference while maintaining input and model device synchronization.</span>
@@ -3360,7 +3361,7 @@ all subsequent tree renderings until explicitly modified.</p>
 </ul>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-431" name="__codelineno-0-431"></a><a href="#__codelineno-0-431"><span class="linenos" data-linenos="431 "></span></a><span class="k">def</span><span class="w"> </span><span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-432" name="__codelineno-0-432"></a><a href="#__codelineno-0-432"><span class="linenos" data-linenos="432 "></span></a><span class="w">    </span><span class="sd">"""Try to delete attributes from Meter instance first, fall back to underlying model if needed.</span>
@@ -3517,7 +3518,7 @@ If no parameters are found, it will raise a warning and move the model to CPU by
     </table>
 
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1845" name="__codelineno-0-1845"></a><a href="#__codelineno-0-1845"><span class="linenos" data-linenos="1845 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">__device_detect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tc_device</span><span class="p">]:</span>
 <a id="__codelineno-0-1846" name="__codelineno-0-1846"></a><a href="#__codelineno-0-1846"><span class="linenos" data-linenos="1846 "></span></a><span class="w">    </span><span class="sd">"""Detects the device where the model are located via model's parameters.</span>
@@ -3615,7 +3616,7 @@ boolean indicating whether the attribute is settable.</p>
     </table>
 
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1946" name="__codelineno-0-1946"></a><a href="#__codelineno-0-1946"><span class="linenos" data-linenos="1946 "></span></a><span class="nd">@classmethod</span>
 <a id="__codelineno-0-1947" name="__codelineno-0-1947"></a><a href="#__codelineno-0-1947"><span class="linenos" data-linenos="1947 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">__get_clsattr_with_settable_flag</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
@@ -3759,7 +3760,7 @@ own attributes. It follows these resolution rules:</p>
 </ul>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-334" name="__codelineno-0-334"></a><a href="#__codelineno-0-334"><span class="linenos" data-linenos="334 "></span></a><span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <a id="__codelineno-0-335" name="__codelineno-0-335"></a><a href="#__codelineno-0-335"><span class="linenos" data-linenos="335 "></span></a><span class="w">    </span><span class="sd">"""Transparently proxy attribute access to the underlying model when not found in Meter instance</span>
@@ -3893,7 +3894,7 @@ own attributes. It follows these resolution rules:</p>
     </table>
 
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1880" name="__codelineno-0-1880"></a><a href="#__codelineno-0-1880"><span class="linenos" data-linenos="1880 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">__is_ipt_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_ipt</span><span class="p">:</span> <span class="n">IPT_TYPE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># noqa: C901</span>
 <a id="__codelineno-0-1881" name="__codelineno-0-1881"></a><a href="#__codelineno-0-1881"><span class="linenos" data-linenos="1881 "></span></a><span class="w">    </span><span class="sd">"""Determines if the new input differs from the current captured input.</span>
@@ -4086,7 +4087,7 @@ own attributes. It follows these resolution rules:</p>
 </ul>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-376" name="__codelineno-0-376"></a><a href="#__codelineno-0-376"><span class="linenos" data-linenos="376 "></span></a><span class="k">def</span><span class="w"> </span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-377" name="__codelineno-0-377"></a><a href="#__codelineno-0-377"><span class="linenos" data-linenos="377 "></span></a><span class="w">    </span><span class="sd">"""Prioritize setting attributes on Meter instance first, falling back to the underlying model.</span>
@@ -4282,7 +4283,7 @@ in the order you prefer.</p>
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1375" name="__codelineno-0-1375"></a><a href="#__codelineno-0-1375"><span class="linenos" data-linenos="1375 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">overview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">order</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_warning</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Columns</span><span class="p">:</span>
 <a id="__codelineno-0-1376" name="__codelineno-0-1376"></a><a href="#__codelineno-0-1376"><span class="linenos" data-linenos="1376 "></span></a><span class="w">    </span><span class="sd">"""Generates an overview of all statistics in a formatted layout.</span>
@@ -4733,7 +4734,7 @@ real-time customization through keyword arguments and can export data to multipl
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1518" name="__codelineno-0-1518"></a><a href="#__codelineno-0-1518"><span class="linenos" data-linenos="1518 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">no_tree</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">tb_kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Table</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">]:</span>
 <a id="__codelineno-0-1519" name="__codelineno-0-1519"></a><a href="#__codelineno-0-1519"><span class="linenos" data-linenos="1519 "></span></a><span class="w">    </span><span class="sd">"""Render a tabular report of the specified statistics with rich visualization.</span>
@@ -5150,7 +5151,7 @@ node ID is "0", the original Meter instance is returned unchanged.</p>
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1207" name="__codelineno-0-1207"></a><a href="#__codelineno-0-1207"><span class="linenos" data-linenos="1207 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">rebase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Meter</span><span class="p">:</span>
 <a id="__codelineno-0-1208" name="__codelineno-0-1208"></a><a href="#__codelineno-0-1208"><span class="linenos" data-linenos="1208 "></span></a><span class="w">    </span><span class="sd">"""Rebases the Meter instance to a specific node in the operation tree.</span>
@@ -5366,7 +5367,7 @@ want to see these warnings, you can set <code>show_warning</code> to <code>False
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1257" name="__codelineno-0-1257"></a><a href="#__codelineno-0-1257"><span class="linenos" data-linenos="1257 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">stat_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_or_statname</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">show_warning</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Text</span><span class="p">:</span>  <span class="c1"># noqa: C901</span>
 <a id="__codelineno-0-1258" name="__codelineno-0-1258"></a><a href="#__codelineno-0-1258"><span class="linenos" data-linenos="1258 "></span></a><span class="w">    </span><span class="sd">"""Generates a formatted summary of the specified statistics.</span>
@@ -5639,7 +5640,7 @@ If the dataframe is empty(i.e. the <code>profile</code> is not called yet), it f
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1440" name="__codelineno-0-1440"></a><a href="#__codelineno-0-1440"><span class="linenos" data-linenos="1440 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">table_cols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
 <a id="__codelineno-0-1441" name="__codelineno-0-1441"></a><a href="#__codelineno-0-1441"><span class="linenos" data-linenos="1441 "></span></a><span class="w">    </span><span class="sd">"""Get all column names of the backend dataframe for the specified statistics.</span>
@@ -5790,7 +5791,7 @@ If the dataframe is empty(i.e. the <code>profile</code> is not called yet), it f
 </code></pre></div>
 </details>
 
-            <details class="quote">
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>torchmeter/core.py</code></summary>
               <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><a id="__codelineno-0-1180" name="__codelineno-0-1180"></a><a href="#__codelineno-0-1180"><span class="linenos" data-linenos="1180 "></span></a><span class="k">def</span><span class="w"> </span><span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_device</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">tc_device</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-1181" name="__codelineno-0-1181"></a><a href="#__codelineno-0-1181"><span class="linenos" data-linenos="1181 "></span></a><span class="w">    </span><span class="sd">"""Move the model to the specified device while keeping input and model device synchronization.</span>
