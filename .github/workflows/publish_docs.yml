@@ -152,6 +152,9 @@ jobs:
           python3 -m pip install --upgrade pip 
           DEPS=$(python -c "import configparser; c=configparser.ConfigParser(); c.read('/tmp/torchmeter-src/setup.cfg'); print(' '.join(c['options.extras_require']['docs'].split('\n')))")
           python3 -m pip install $DEPS 
+          
+          # pin mkdocs-jupyter version to avoid breaking changes (independent of tag)
+          python3 -m pip install mkdocs-jupyter==0.25.1
 
           cd $WORKING_PATH
       
